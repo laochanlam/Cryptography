@@ -9,7 +9,7 @@ public class Client {
   public static int port = 3002;
 
   public static void main(String args[]) throws Exception {
-    Socket client = new Socket(args[0], port);
+    Socket client = new Socket("127.0.0.1", port);
     InputStream in = client.getInputStream();
     BufferedReader reader = new BufferedReader(
       new InputStreamReader(in)

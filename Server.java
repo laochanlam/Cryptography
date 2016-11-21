@@ -7,7 +7,7 @@ public class Server {
 
   public static void main(String args[]) throws Exception {
     ServerSocket ss = new ServerSocket(port);
-    while (true) {
+    while (true) { //connected
       Socket sc = ss.accept();
       OutputStream os = sc.getOutputStream();
 
@@ -15,6 +15,8 @@ public class Server {
       os.write("hihihihi".getBytes("UTF-8"));
       os.close();
       sc.close();
+
+      System.out.println("Someone Connected");
     }
   }
 }
