@@ -4,15 +4,50 @@ import java.io.OutputStream;
 import java.io.InputStream;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import javax.crypto.*;
+import java.security.*;
+import sun.misc.*;
+import javax.crypto.spec.*;
 
 public class Client {
-  public static int port = 3002;
 
+
+  public static int port = 3002;
   public static void main(String args[]) throws Exception {
+
+    String plainText = "Hello , is me !";
+    String key = "12345678";
+
+    SecureRandom random = new SecureRandom();  //just random
+
+    DESKeySpec keyspec = new DESKeySpec(key.getBytes());
+    
+    SecretKeyFactory keyFactory = SecretKeyFactory.getInstance("DES");
+    SecretKey secretkey = keyFactory.generateSecret(keyspec);
+	//key generation
+
+    Cipher cipher = Cipher.getInstance("DES/ECB/PKCS5Padding");
+    cipher.init(Cipher.ENCRYPT_MODE, secretkey , random);
+    byte[] cipherData = cipher.doFinal(plainText.getBytes());
+	//Encrypt
+
+
+      System.out.println(cipherData);	
+   
+
+      cipher.init(Cipher.DECRYPT_MODE , secretkey , random);
+      byte[] plainData = cipher.doFinal(cipherData);
+      System.out.println(new String(plainData));
+ 
+
+
+
+
+
     Socket client = new Socket("127.0.0.1", port);
 
     OutputStream sent = client.getOutputStream();
-    sent.write("this is client".getBytes("UTF-8"));
+    sent.write(new String(cipherData).getBytes("UTF-8"));
 
     sent.close();
     client.close();
