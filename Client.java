@@ -10,14 +10,13 @@ public class Client {
 
   public static void main(String args[]) throws Exception {
     Socket client = new Socket("127.0.0.1", port);
-    InputStream in = client.getInputStream();
-    BufferedReader reader = new BufferedReader(
-      new InputStreamReader(in)
-    );
 
-    String msg = reader.readLine();
-    System.out.println(msg);
+    OutputStream sent = client.getOutputStream();
+    sent.write("this is client".getBytes("UTF-8"));
+
+    sent.close();
     client.close();
+
   }
 }
 
