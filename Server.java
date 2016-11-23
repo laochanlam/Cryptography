@@ -21,6 +21,8 @@ public class Server {
 
       System.out.println("Someone Connected");
 
+/////////////////////////CBC/////////////////////////
+
       InputStream input = server.getInputStream();
       BufferedReader reader = new BufferedReader(
       	new InputStreamReader(input)
@@ -46,6 +48,12 @@ public class Server {
 	//print out P 
 
       input.close();
+
+/////////////////////////CBC//////////////////////////
+
+
+
+
       server.close();
 
     }
