@@ -17,7 +17,7 @@ public class Client {
 
     String plainText = "Hello ,This is CBC !";
     String key = "12345678";
-    byte [] iv = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+    byte [] iv = {0,0,0,0,0,0,0,1};
     IvParameterSpec ivspec = new IvParameterSpec(iv);
 	//Key , PlainText & IV
 
@@ -29,8 +29,8 @@ public class Client {
     SecretKey secretkey = keyFactory.generateSecret(keyspec);
 	//key generation
 
-    Cipher cipher = Cipher.getInstance("DES/ECB/PKCS5Padding");
-    cipher.init(Cipher.ENCRYPT_MODE, secretkey , random);
+    Cipher cipher = Cipher.getInstance("DES/CBC/PKCS5Padding");
+    cipher.init(Cipher.ENCRYPT_MODE, secretkey , ivspec);
     byte[] cipherData = cipher.doFinal(plainText.getBytes("UTF-8"));
 	//Encrypt
 

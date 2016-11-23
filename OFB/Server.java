@@ -13,7 +13,7 @@ public class Server {
 
   public static void main(String args[]) throws Exception {
     ServerSocket ss = new ServerSocket(port);
-    byte[] iv = { 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 };
+    byte[] iv = { 1,0,1,0,1,0,1,0 };
     IvParameterSpec ivspec = new IvParameterSpec(iv);
 
     while (true) { //if connected
@@ -21,7 +21,7 @@ public class Server {
 
       System.out.println("Someone Connected");
 
-/////////////////////////CBC/////////////////////////
+/////////////////////////OFB/////////////////////////
 
       InputStream input = server.getInputStream();
       BufferedReader reader = new BufferedReader(
@@ -39,8 +39,8 @@ public class Server {
 	//key generation
 
    
-      Cipher cipher = Cipher.getInstance("DES/ECB/NoPadding");
-      cipher.init(Cipher.DECRYPT_MODE , secretkey);
+      Cipher cipher = Cipher.getInstance("DES/OFB/NoPadding");
+      cipher.init(Cipher.DECRYPT_MODE , secretkey, ivspec);
       byte[] plainData = cipher.doFinal(buffer);
 	//Decrypt
 
@@ -49,7 +49,7 @@ public class Server {
 
       input.close();
 
-/////////////////////////CBC//////////////////////////
+/////////////////////////OFB//////////////////////////
 
 
 
