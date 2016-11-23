@@ -16,25 +16,21 @@ public class Server {
     byte[] iv = { 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 };
     IvParameterSpec ivspec = new IvParameterSpec(iv);
 
-    while (true) { //connected
+    while (true) { //if connected
       Socket server = ss.accept();
-      
+
       System.out.println("Someone Connected");
 
       InputStream input = server.getInputStream();
       BufferedReader reader = new BufferedReader(
       	new InputStreamReader(input)
-	);
-	int value = 0;
-	byte[] buffer = new byte[24];
-	
-	while((value=input.read(buffer)) != -1);
-
+      );
+      int value = 0;
+      byte[] buffer = new byte[24];
+      while((value=input.read(buffer)) != -1);
+	//Receive & format data	
 
       String key = "12345678";
-
-      SecureRandom random = new SecureRandom();  //just random
-
       DESKeySpec keyspec = new DESKeySpec(key.getBytes("UTF-8"));
       SecretKeyFactory keyFactory = SecretKeyFactory.getInstance("DES");
       SecretKey secretkey = keyFactory.generateSecret(keyspec);
@@ -44,9 +40,11 @@ public class Server {
       Cipher cipher = Cipher.getInstance("DES/ECB/NoPadding");
       cipher.init(Cipher.DECRYPT_MODE , secretkey);
       byte[] plainData = cipher.doFinal(buffer);
+	//Decrypt
 
- System.out.println(new String(plainData));
-      
+      System.out.println(new String(plainData));
+	//print out P 
+
       input.close();
       server.close();
 
