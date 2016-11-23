@@ -15,7 +15,7 @@ public class Client {
   public static int port = 3002;
   public static void main(String args[]) throws Exception {
 
-    String plainText = "Hello , is me !";
+    String plainText = "Hello ,This is CBC !";
     String key = "12345678";
 
     SecureRandom random = new SecureRandom();  //just random
@@ -28,17 +28,23 @@ public class Client {
 
     Cipher cipher = Cipher.getInstance("DES/ECB/PKCS5Padding");
     cipher.init(Cipher.ENCRYPT_MODE, secretkey , random);
-    byte[] cipherData = cipher.doFinal(plainText.getBytes());
+    byte[] cipherData = cipher.doFinal(plainText.getBytes("UTF-8"));
 	//Encrypt
 
+      for(int i=0;i<cipherData.length;++i)
+	System.out.println(cipherData[i]);	
 
-      System.out.println(cipherData);	
-   
 
+
+	String hihi = new String(cipherData);
+
+      System.out.println(hihi.length());	
+      System.out.println(cipherData.length);	
+/*
       cipher.init(Cipher.DECRYPT_MODE , secretkey , random);
       byte[] plainData = cipher.doFinal(cipherData);
       System.out.println(new String(plainData));
- 
+ */
 
 
 
@@ -47,7 +53,7 @@ public class Client {
     Socket client = new Socket("127.0.0.1", port);
 
     OutputStream sent = client.getOutputStream();
-    sent.write(new String(cipherData).getBytes("UTF-8"));
+    sent.write(cipherData);
 
     sent.close();
     client.close();

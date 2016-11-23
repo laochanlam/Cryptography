@@ -18,38 +18,38 @@ public class Server {
 
     while (true) { //connected
       Socket server = ss.accept();
-     
+      
+      System.out.println("Someone Connected");
+
       InputStream input = server.getInputStream();
       BufferedReader reader = new BufferedReader(
       	new InputStreamReader(input)
 	);
-
-      String msg = reader.readLine();
+	int value = 0;
+	byte[] buffer = new byte[24];
 	
-
+	while((value=input.read(buffer)) != -1);
 
 
       String key = "12345678";
 
       SecureRandom random = new SecureRandom();  //just random
 
-      DESKeySpec keyspec = new DESKeySpec(key.getBytes());
+      DESKeySpec keyspec = new DESKeySpec(key.getBytes("UTF-8"));
       SecretKeyFactory keyFactory = SecretKeyFactory.getInstance("DES");
       SecretKey secretkey = keyFactory.generateSecret(keyspec);
 	//key generation
 
    
-      Cipher cipher = Cipher.getInstance("DES/ECB/PKCS5Padding");
+      Cipher cipher = Cipher.getInstance("DES/ECB/NoPadding");
       cipher.init(Cipher.DECRYPT_MODE , secretkey);
-      byte[] plainData = cipher.doFinal(msg.getBytes());
-     System.out.println(msg);
+      byte[] plainData = cipher.doFinal(buffer);
+
+ System.out.println(new String(plainData));
       
       input.close();
       server.close();
 
-
-
-      System.out.println("Someone Connected");
     }
   }
 }
