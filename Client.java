@@ -107,7 +107,7 @@ while (1==1){
                 client.close();
                 break;
 
-        case 4:                 //OFB
+        case 4: //OFB
 
                 Cipher cipherOFB = Cipher.getInstance("DES/OFB/PKCS5Padding");
                 cipherOFB.init(Cipher.ENCRYPT_MODE, secretkey, ivspec);
@@ -128,7 +128,7 @@ while (1==1){
                 break;
 
 
-        case 5:         //CTR
+        case 5: //CTR
 
                 Cipher cipherCTR = Cipher.getInstance("DES/CTR/NoPadding");
                 cipherCTR.init(Cipher.ENCRYPT_MODE, secretkey, ivspec);

@@ -31,17 +31,16 @@ public static void main(String args[]) throws Exception {
 
                 DataInputStream in = new DataInputStream(server.getInputStream());
                 int option = in.readInt();
-		
+
                 int length = 0;
                 int i = 0;
 
                 switch(option) {
                 case 1:
-// /////////////////////////ECB/////////////////////////
                         InputStream inputECB = server.getInputStream();
 
 
-System.out.println("<<<<ECB>>>>");
+                        System.out.println("<<<<ECB>>>>");
 
                         Cipher cipherECB = Cipher.getInstance("DES/ECB/NoPadding");
                         cipherECB.init(Cipher.DECRYPT_MODE, secretkey);
@@ -55,16 +54,13 @@ System.out.println("<<<<ECB>>>>");
                         }
                         inputECB.close();
                         server.close();
-                        // /////////////////////////ECB//////////////////////////
                         break;
 
 
                 case 2:         //CFB
-                                /////////////////////////CFB/////////////////////////
-                                /////////////////////////CFB/////////////////////////
                         InputStream inputCFB = server.getInputStream();
 
-System.out.println("<<<<CFB>>>>");
+                        System.out.println("<<<<CFB>>>>");
 
 
                         Cipher cipherCFB = Cipher.getInstance("DES/CFB/NoPadding");
@@ -94,12 +90,10 @@ System.out.println("<<<<CFB>>>>");
 
                         break;
 
-                case 3:                 //CFB
-                                        /////////////////////////CFB/////////////////////////
-                                        /////////////////////////CFB/////////////////////////
+                case 3:                 //CBC
                         InputStream inputCBC = server.getInputStream();
 
-System.out.println("<<<<CBC>>>>");
+                        System.out.println("<<<<CBC>>>>");
 
 
                         Cipher cipherCBC = Cipher.getInstance("DES/CBC/NoPadding");
@@ -129,11 +123,10 @@ System.out.println("<<<<CBC>>>>");
 
                         break;
 
-                case 4:                                 //CFB
-                                                        /////////////////////////CFB/////////////////////////
+                case 4:               //OFB
                         InputStream inputOFB = server.getInputStream();
 
-System.out.println("<<<<OFB>>>>");
+                        System.out.println("<<<<OFB>>>>");
 
 
                         Cipher cipherOFB = Cipher.getInstance("DES/OFB/NoPadding");
@@ -163,10 +156,10 @@ System.out.println("<<<<OFB>>>>");
 
                         break;
 
-                case 5:                         //CFB
+                case 5:                //CTR
                         InputStream inputCTR = server.getInputStream();
 
-System.out.println("<<<<CTR>>>>");
+                        System.out.println("<<<<CTR>>>>");
 
 
                         Cipher cipherCTR = Cipher.getInstance("DES/CTR/NoPadding");
@@ -195,10 +188,10 @@ System.out.println("<<<<CTR>>>>");
                         server.close();
 
                         break;
-		case 6:
-			return;
+                case 6:
+                        return;
                 }
-		System.out.println();
+                System.out.println();
         }
 }
 }
