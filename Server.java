@@ -19,7 +19,6 @@ public static void main(String args[]) throws Exception {
         while (true) { //if connected
                 Socket server = ss.accept();
 
-                System.out.println("Someone Connected");
                 byte[] iv = {1,1,1,1,0,0,0,0};
                 IvParameterSpec ivspec = new IvParameterSpec(iv);
 
@@ -32,8 +31,7 @@ public static void main(String args[]) throws Exception {
 
                 DataInputStream in = new DataInputStream(server.getInputStream());
                 int option = in.readInt();
-
-                System.out.println(option);
+		
                 int length = 0;
                 int i = 0;
 
@@ -43,6 +41,7 @@ public static void main(String args[]) throws Exception {
                         InputStream inputECB = server.getInputStream();
 
 
+System.out.println("<<<<ECB>>>>");
 
                         Cipher cipherECB = Cipher.getInstance("DES/ECB/NoPadding");
                         cipherECB.init(Cipher.DECRYPT_MODE, secretkey);
@@ -65,6 +64,7 @@ public static void main(String args[]) throws Exception {
                                 /////////////////////////CFB/////////////////////////
                         InputStream inputCFB = server.getInputStream();
 
+System.out.println("<<<<CFB>>>>");
 
 
                         Cipher cipherCFB = Cipher.getInstance("DES/CFB/NoPadding");
@@ -99,6 +99,7 @@ public static void main(String args[]) throws Exception {
                                         /////////////////////////CFB/////////////////////////
                         InputStream inputCBC = server.getInputStream();
 
+System.out.println("<<<<CBC>>>>");
 
 
                         Cipher cipherCBC = Cipher.getInstance("DES/CBC/NoPadding");
@@ -132,6 +133,7 @@ public static void main(String args[]) throws Exception {
                                                         /////////////////////////CFB/////////////////////////
                         InputStream inputOFB = server.getInputStream();
 
+System.out.println("<<<<OFB>>>>");
 
 
                         Cipher cipherOFB = Cipher.getInstance("DES/OFB/NoPadding");
@@ -162,9 +164,9 @@ public static void main(String args[]) throws Exception {
                         break;
 
                 case 5:                         //CFB
-                        /////////////////////////CFB/////////////////////////
                         InputStream inputCTR = server.getInputStream();
 
+System.out.println("<<<<CTR>>>>");
 
 
                         Cipher cipherCTR = Cipher.getInstance("DES/CTR/NoPadding");
@@ -193,8 +195,10 @@ public static void main(String args[]) throws Exception {
                         server.close();
 
                         break;
-
+		case 6:
+			return;
                 }
+		System.out.println();
         }
 }
 }

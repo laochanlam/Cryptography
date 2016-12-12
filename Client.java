@@ -13,9 +13,10 @@ public class Client {
 public static int port = 3002;
 public static void main(String args[]) throws Exception {
 
+while (1==1){
 
         Scanner scanner = new Scanner(System.in);
-        System.out.println("ECB:1 CBC:2 CFB:3 OFB:4 CTR:5");
+        System.out.println("ECB:1 CBC:2 CFB:3 OFB:4 CTR:5 Leave:6");
 
         Socket client = new Socket("127.0.0.1", port);
         DataOutputStream out = new DataOutputStream(client.getOutputStream());
@@ -147,9 +148,12 @@ public static void main(String args[]) throws Exception {
                 client.close();
                 break;
 
-
+	case 6:
+		return;
+		break;
         }
 
 
+}
 }
 }
