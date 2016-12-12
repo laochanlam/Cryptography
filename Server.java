@@ -172,12 +172,12 @@ public static void main(String args[]) throws Exception {
 
 
                         int valueCTR = 0;
-                        byte[] bufferCTR = new byte[8];
+                        byte[] bufferCTR = new byte[1];
                         byte[] bufferCTR2 = new byte[256];
                         while((valueCTR=inputCTR.read(bufferCTR)) != -1) {
-                                for (i=0; i<8; i++)
+                                for (i=0; i<1; i++)
                                         bufferCTR2[i+length] = bufferCTR[i];
-                                length = length+8;
+                                length = length+1;
                         }
                         byte[] realdoCTR = new byte[length];
                         for (i=0; i<length; i++)
