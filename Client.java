@@ -150,7 +150,7 @@ while (1==1){
 
 	case 6:
 		return;
-		break;
+		
         }
 
 
